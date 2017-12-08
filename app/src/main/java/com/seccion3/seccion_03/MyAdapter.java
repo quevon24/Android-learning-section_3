@@ -49,17 +49,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             this.textViewName = (TextView) itemView.findViewById(R.id.textViewName);
-            
+
         }
 
-        public  void bind(final String name, final OnItemClickListener listener) {
+        public void bind(final String name, final OnItemClickListener listener) {
 
             this.textViewName.setText(name);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(name,getAdapterPosition());
+                    listener.onItemClick(name, getAdapterPosition());
                 }
             });
 
