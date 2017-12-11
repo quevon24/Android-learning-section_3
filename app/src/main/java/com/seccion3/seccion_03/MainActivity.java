@@ -3,8 +3,10 @@ package com.seccion3.seccion_03;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,7 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        mLayoutManager = new LinearLayoutManager(this);
+        // List view
+        // mLayoutManager = new LinearLayoutManager(this);
+        // Grid view
+        // mLayoutManager = new GridLayoutManager(this, 2);
+        // Staggered Grid view, similar a grid view, pero permite aplicar los items de diferentes tamaños
+        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
         mAdapter = new MyAdapter(names, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
             @Override
