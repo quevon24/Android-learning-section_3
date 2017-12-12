@@ -1,4 +1,4 @@
-package com.seccion3.seccion_03;
+package com.seccion3.seccion_03.Models;
 
 /**
  * Created by quevon24 on 11/12/2017.

@@ -1,23 +1,23 @@
-package com.seccion3.seccion_03;
+package com.seccion3.seccion_03.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.seccion3.seccion_03.Models.Movie;
+import com.seccion3.seccion_03.Adapters.MyAdapter;
+import com.seccion3.seccion_03.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<String> names;
+    private List<Movie> movies;
 
     private RecyclerView mRecyclerView;
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        names = this.getAllNames();
+        movies = this.getAllMovies();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
         // Staggered Grid view, similar a grid view, pero permite aplicar los items de diferentes tamaños
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
-        mAdapter = new MyAdapter(names, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
+        mAdapter = new MyAdapter(movies, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(String name, int position) {
+            public void onItemClick(Movie movie, int position) {
                 // Toast.makeText(getApplicationContext(), name + " - " + position, Toast.LENGTH_LONG).show();
-                deleteName(position);
+                deleteMovie(position);
             }
         });
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.add_name:
-                this.addName(0);
+                this.addMovie(0);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -72,15 +72,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void addName(int position) {
-        names.add(position, "New name " + (++counter));
+    private void addMovie(int position) {
+        movies.add(position, new Movie("New movie " + (++counter) , R.drawable.newmovie));
         mAdapter.notifyItemInserted(position);
         // Moverse a la posicion donde se agrego el elemento
         mLayoutManager.scrollToPosition(position);
     }
 
-    private void deleteName(int position) {
-        names.remove(position);
+    private void deleteMovie(int position) {
+        movies.remove(position);
         mAdapter.notifyItemRemoved(position);
     }
 
@@ -90,13 +90,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private List<String> getAllNames() {
-        return new ArrayList<String>() {{
-            add("Alejandro");
-            add("Jose");
-            add("Barrera");
-            add("Ruben");
-            add("Antonio");
+    private List<Movie> getAllMovies() {
+        return new ArrayList<Movie>() {{
+            add(new Movie("Ben Hur", R.drawable.american));
+            add(new Movie("Deadpool", R.drawable.detroit));
+            add(new Movie("Guardianes", R.drawable.dunkirk));
+            add(new Movie("Warcraft", R.drawable.kingsman));
         }};
     }
 
